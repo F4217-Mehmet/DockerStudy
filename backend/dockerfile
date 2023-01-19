@@ -1,0 +1,14 @@
+FROM python:3.9.16-bullseye
+WORKDIR /backend
+
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
+COPY . .  
+#localde bulunan backend içerisindeki dosyaları al kopyala, dockerfile ile aynı hizadalar diye . . yazdık
+RUN pip install -r requirements.txt
+#requirements içerisindeki paketleri containerın içerisine yükle, buraya kadar build aşamasıydı  
+EXPOSE 8000
+#HANGİ PORTTAN ÇIKIŞ YAPACAĞINI SÖYLÜYORSUN, YAZARSAN DAHA İYİ, YAZMASAN DA OLUR
+
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
